@@ -82,7 +82,11 @@ public class Parsing {
                 this.textFromParser = (xcoord.get(j) + " " + ycoord.get(j) + " " + i + " " + j + " " + this.matrix[i][j] + " ");
             }
         }
-        System.out.print("*Парсинг закончен!");
+        System.out.println("*Парсинг закончен!");
+    }
+
+    public String getText(){
+        return textFromParser;
     }
 
 /*
