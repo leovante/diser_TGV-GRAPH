@@ -10,7 +10,8 @@ public class Parsing {
     private ArrayList<Integer> num; // количество точек
     private int[][] matrix; // матрица, в которой между всеми точками рассчитывается расстояние
     private int number = 0;
-    private String parsFromFile = "D:/Develop/GitHub/belgorodGraph/src/main/resources/1_parsFromFile.txt";
+    InputStream input = getClass().getResourceAsStream("1_parsFromFile.txt");
+    private String parsFromFile = "1_parsFromFile.txt";
     private String parsToFile = "D:/Develop/GitHub/belgorodGraph/src/main/resources/2_toKruskal.txt";
     private String textToFile = ""; // сюда записывается строка, которая содержит проПарсенные данные
 

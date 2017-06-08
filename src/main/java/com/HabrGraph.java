@@ -49,6 +49,7 @@ public class HabrGraph extends JFrame {
                     int cost = (Integer.valueOf(tok.nextToken()).intValue()); // здесь расстояние между точками мне не нужно
                     fromPoint.add(from);
                     toPoint.add(to);
+                    System.out.print(from + " " + cost + " ");
                 }
                 line = buff.readLine();
             }
