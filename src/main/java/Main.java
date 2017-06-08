@@ -1,3 +1,5 @@
+import com.Parsing;
+
 import java.io.IOException;
 
 /**
@@ -8,9 +10,7 @@ public class Main {
         Parsing pars = new Parsing();
         pars.mainOne();
 //        Kruskal.mainTwo();
-//        HabrGraph.mainTree();
-
-
+//        com.HabrGraph.mainTree();
 
     }
 }
