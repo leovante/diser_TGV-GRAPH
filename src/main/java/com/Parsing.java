@@ -2,27 +2,31 @@ package com;
 
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Parsing {
-    private ArrayList <Double> xcoord; // X координата точек
-    private ArrayList <Double> ycoord; //Y координата точек
-    private ArrayList <Integer> num; // количество точек
+    private ArrayList<Double> xcoord; // X координата точек
+    private ArrayList<Double> ycoord; //Y координата точек
+    private ArrayList<Integer> num; // количество точек
     private int[][] matrix; // матрица, в которой между всеми точками рассчитывается расстояние
     private int number = 0;
-    private String firstFile = "C:/Users/pro22/IdeaProjects/belgorodGraph/src/main/resources/1_fileToParsing.txt";
-    private String textFromParser; // сюда записывается строка, которая содержит проПарсенные данные
+    private String parsFromFile = "D:/Develop/GitHub/belgorodGraph/src/main/resources/1_parsFromFile.txt";
+    private String parsToFile = "D:/Develop/GitHub/belgorodGraph/src/main/resources/2_toKruskal.txt";
+    private String textToFile = ""; // сюда записывается строка, которая содержит проПарсенные данные
 
-    public void mainOne() throws IOException {
+    public void mainOne() throws IOException, InterruptedException {
         System.out.println("Первый этап - запуск парсера");
-        Parsing k = new Parsing();
-        k.readInGraphXYN(this.firstFile);
-        k.readInGraphLenght();
+        TimeUnit.SECONDS.sleep(2);
+        Parsing p = new Parsing();
+        p.readInGraphXYN(this.parsFromFile);
+        p.readInGraphLenght();
+        p.writeInFile();
     }
 
     public Parsing() {
-        xcoord = new ArrayList <Double>();
-        ycoord = new ArrayList <Double>();
-        num = new ArrayList <Integer>();
+        xcoord = new ArrayList<Double>();
+        ycoord = new ArrayList<Double>();
+        num = new ArrayList<Integer>();
     }
 
     public void readInGraphXYN(String fileName) {
@@ -31,7 +35,7 @@ public class Parsing {
             BufferedReader buff = new BufferedReader(file);
             String line = buff.readLine();
             while (line != null) {
-                System.out.println("*Текст найден! Начинаю парсить файл");
+                System.out.println("*Текст найден! Начинаю парсить файл!");
                 StringTokenizer tok = new StringTokenizer(line, " ");
                 while (tok.hasMoreTokens()) {
                     int foo = Integer.valueOf(tok.nextToken()).intValue();
@@ -45,6 +49,7 @@ public class Parsing {
                 line = buff.readLine();
             }
             buff.close();
+            file.close();
         } catch (IOException e) {
             //
         }
@@ -79,37 +84,20 @@ public class Parsing {
                 }
                 int realize = (int) Math.sqrt(Math.pow(xj - xi, 2) + Math.pow(yj - yi, 2));
                 this.matrix[i][j] = realize;
-                this.textFromParser = (xcoord.get(j) + " " + ycoord.get(j) + " " + i + " " + j + " " + this.matrix[i][j] + " ");
+                this.textToFile = this.textToFile + (xcoord.get(j) + " " + ycoord.get(j) + " " + i + " " + j + " " + this.matrix[i][j] + " ");
             }
         }
         System.out.println("*Парсинг закончен!");
     }
 
-    public String getText(){
-        System.out.println("Крускал забирает файл");
-        return textFromParser;
-
-    }
-
-/*
-    public void textValidate(){
+    public void writeInFile() {
+        System.out.println("*Записываю в файл!");
         try {
-            FileWriter fstream1 = new FileWriter(firstFile);// конструктор с одним параметром - для перезаписи
-            BufferedWriter buff = new BufferedWriter(fstream1); //  создаём буферезированный поток
-            String line = buff.readline();
-            if(out1.)
-            out1.write(""); // очищаем, перезаписав поверх пустую строку
-            out1.close(); // закрываем
-        } catch (Exception e)
-        {System.err.println("Error in file cleaning: " + e.getMessage());}
-
-        com.Parsing getText = new com.Parsing();
-        String textValidate = getText.textFromParser;
-        if(textValidate != null){
-            System.out.println("Парсинг выполнен!");
-        }else{
-            System.out.println("Ошибка парсинга!");
+            FileWriter write = new FileWriter(this.parsToFile, false);
+            write.write(this.textToFile);
+            write.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
-*/
 }

@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class HabrGraph extends JFrame {
-    private ArrayList <Object> objectPointV1 = new ArrayList <Object>();
-    private ArrayList <Object> objectPointV2 = new ArrayList <Object>();
-    private ArrayList <Object> objectPipe = new ArrayList <Object>();
-    private ArrayList <Integer> fromPoint = new ArrayList <Integer>(); //номер первой точки
-    private ArrayList <Integer> toPoint = new ArrayList <Integer>(); // номер второй точки
-    private ArrayList <Double> xcoord = new ArrayList <Double>();
-    private ArrayList <Double> ycoord = new ArrayList <Double>();
+    private ArrayList<Object> objectPointV1 = new ArrayList<Object>();
+    private ArrayList<Object> objectPointV2 = new ArrayList<Object>();
+    private ArrayList<Object> objectPipe = new ArrayList<Object>();
+    private ArrayList<Integer> fromPoint = new ArrayList<Integer>(); //номер первой точки
+    private ArrayList<Integer> toPoint = new ArrayList<Integer>(); // номер второй точки
+    private ArrayList<Double> xcoord = new ArrayList<Double>();
+    private ArrayList<Double> ycoord = new ArrayList<Double>();
 
     public static void mainTree() {
         System.out.println("Третий этап - запуск com.HabrGraph");
@@ -29,8 +29,8 @@ public class HabrGraph extends JFrame {
 
     public HabrGraph() {
         super("Temnikov prog. (v. Alpha)");
-        String fileOne = "D:/Develop/GitHub/com.Kruskal/src/com/3 Оптимизированная матрица.txt/";
-        String fileTwo = "D:/Develop/GitHub/com.Kruskal/src/com/2 Матрица всех точек.txt/";
+        String fileOne = "D:/Develop/GitHub/com.Kruskal/src/com/3_matrix.txt/";
+        String fileTwo = "D:/Develop/GitHub/com.Kruskal/src/com/2_toKruskal.txt/";
 
         mxGraph graph = new mxGraph();
         Object parent = graph.getDefaultParent();
@@ -71,9 +71,9 @@ public class HabrGraph extends JFrame {
                     int from = Integer.valueOf(tokTwo.nextToken()).intValue();
                     int to = Integer.valueOf(tokTwo.nextToken()).intValue();
                     int cost = Integer.valueOf(tokTwo.nextToken()).intValue();
-                    while (xcoord.size()<136){
-                        xcoord.add(x*2);
-                        ycoord.add(-y*2+600);
+                    while (xcoord.size() < 136) {
+                        xcoord.add(x * 2);
+                        ycoord.add(-y * 2 + 600);
                         break;
                     }
                 }
@@ -92,7 +92,6 @@ public class HabrGraph extends JFrame {
                 java.lang.Object v2 = graph.insertVertex(parent, null, toPoint.get(i), xcoord.get(toPoint.get(i)), ycoord.get(toPoint.get(i)), 22, 15);
                 objectPointV1.add(v);
                 objectPointV2.add(v2);
-
                 graph.insertEdge(parent, null, " ", v, v2);
             }
         } finally {
