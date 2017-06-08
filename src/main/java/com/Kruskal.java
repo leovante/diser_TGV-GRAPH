@@ -10,15 +10,15 @@ public class Kruskal {
     private TreeSet allEdges;              // Priority queue of Edge objects
     private Vector allNewEdges;            // Edges in Minimal-Spanning Tree
 
-    public void mainTwo(){
+    public void mainTwo() {
         System.out.println("Второй этап - запуск алгоритма Краскала");
+
         Kruskal k = new Kruskal();
 
         Parsing pars = new Parsing();
+        String fileName = pars.getText();
 
-
-        String fileName = pars.getText();;
-        k.readInGraphData(fileName); //было args[0]
+        k.readInGraphData(fileName);
         k.performKruskal();
         k.printFinalEdges();
     }

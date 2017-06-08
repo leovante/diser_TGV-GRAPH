@@ -86,7 +86,9 @@ public class Parsing {
     }
 
     public String getText(){
+        System.out.println("Крускал забирает файл");
         return textFromParser;
+
     }
 
 /*
