@@ -1,8 +1,11 @@
 package com;
 
-import java.io.*;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class Parsing {
     private ArrayList<Double> xcoord; // X координата точек
@@ -10,14 +13,13 @@ public class Parsing {
     private ArrayList<Integer> num; // количество точек
     private int[][] matrix; // матрица, в которой между всеми точками рассчитывается расстояние
     private int number = 0;
-    InputStream input = getClass().getResourceAsStream("1_parsFromFile.txt");
-    private String parsFromFile = "1_parsFromFile.txt";
-    private String parsToFile = "D:/Develop/GitHub/belgorodGraph/src/main/resources/2_toKruskal.txt";
+//    InputStream input = getClass().getResourceAsStream("1_parsFromFile.txt");
+    private String parsFromFile = "src/main/resources/1_parsFromFile.txt";
+    private String parsToFile = "src/main/resources/2_toKruskal.txt";
     private String textToFile = ""; // сюда записывается строка, которая содержит проПарсенные данные
 
-    public void mainOne() throws IOException, InterruptedException {
+    public void mainOne() throws IOException {
         System.out.println("Первый этап - запуск парсера");
-        TimeUnit.SECONDS.sleep(2);
         Parsing p = new Parsing();
         p.readInGraphXYN(this.parsFromFile);
         p.readInGraphLenght();
@@ -92,7 +94,7 @@ public class Parsing {
     }
 
     public void writeInFile() {
-        System.out.println("*Записываю в файл!");
+        System.out.println("*Записываю в файл, Первый этап закончен!");
         try {
             FileWriter write = new FileWriter(this.parsToFile, false);
             write.write(this.textToFile);

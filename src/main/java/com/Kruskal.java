@@ -1,8 +1,10 @@
 package com;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings("unchecked")
 public class Kruskal {
@@ -10,14 +12,13 @@ public class Kruskal {
     private HashSet nodes[];               // Array of connected components
     private TreeSet allEdges;              // Priority queue of Edge objects
     private Vector allNewEdges;            // Edges in Minimal-Spanning Tree
-    private String parsFromFile = "D:/Develop/GitHub/belgorodGraph/src/main/resources/2_toKruskal.txt";
-    private String parsToFile = "D:/Develop/GitHub/belgorodGraph/src/main/resources/3_matrix.txt";
-    private String textToFile; // сюда записывается строка, которая содержит проПарсенные данные
+    private String parsFromFile = "src/main/resources/2_toKruskal.txt";
+    private String parsToFile = "src/main/resources/3_matrix.txt";
+    private String textToFile = ""; // сюда записывается строка, которая содержит проПарсенные данные
 
 
-    public void mainTwo() throws InterruptedException {
+    public void mainTwo() {
         System.out.println("Второй этап - запуск алгоритма Краскала");
-        TimeUnit.SECONDS.sleep(2);
         Kruskal k = new Kruskal();
         k.readInGraphData(this.parsFromFile);
         k.performKruskal();
@@ -26,10 +27,10 @@ public class Kruskal {
     }
 
     private void writeToFile() {
-        System.out.println("*Записываю в файл!");
+        System.out.println("*Записываю в файл, второй этап закончен!");
         try {
             FileWriter write = new FileWriter(this.parsToFile, false);
-            write.write(this.parsToFile);
+            write.write(this.textToFile);
             write.close();
         } catch (IOException e) {
             e.printStackTrace();

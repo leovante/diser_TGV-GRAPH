@@ -1,6 +1,7 @@
 package com;
 
 import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.util.mxConstants;
 import com.mxgraph.view.mxGraph;
 
 import javax.swing.*;
@@ -18,9 +19,13 @@ public class HabrGraph extends JFrame {
     private ArrayList<Integer> toPoint = new ArrayList<Integer>(); // номер второй точки
     private ArrayList<Double> xcoord = new ArrayList<Double>();
     private ArrayList<Double> ycoord = new ArrayList<Double>();
+    private String parseFromFileMatrix = "src/main/resources/3_matrix.txt";
+    private String parseFromFileSet = "src/main/resources/2_toKruskal.txt";
+    private String parseFromFileCoord = "src/main/resources/4_koordinati_tochek_136.txt";
+    private String textToFile_4 = "";
 
-    public static void mainTree() {
-        System.out.println("Третий этап - запуск com.HabrGraph");
+    public static void mainThree() {
+        System.out.println("Третий этап - запуск HabrGraph");
         HabrGraph frame = new HabrGraph();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1100, 700);
@@ -28,9 +33,9 @@ public class HabrGraph extends JFrame {
     }
 
     public HabrGraph() {
+
         super("Temnikov prog. (v. Alpha)");
-        String fileOne = "D:/Develop/GitHub/com.Kruskal/src/com/3_matrix.txt/";
-        String fileTwo = "D:/Develop/GitHub/com.Kruskal/src/com/2_toKruskal.txt/";
+        mxConstants.DEFAULT_MARKERSIZE = 0;
 
         mxGraph graph = new mxGraph();
         Object parent = graph.getDefaultParent();
@@ -38,7 +43,8 @@ public class HabrGraph extends JFrame {
         graph.getModel().beginUpdate();
 
         try { //парсинг первой точки, второй точки и расстояния между ними
-            FileReader first = new FileReader(fileOne);
+            System.out.println("*Парсинг первой точки, второй точки и расстояния между ними");
+            FileReader first = new FileReader(parseFromFileMatrix);
             BufferedReader buff = new BufferedReader(first);
             String line = buff.readLine();
             while (line != null) {
@@ -49,7 +55,7 @@ public class HabrGraph extends JFrame {
                     int cost = (Integer.valueOf(tok.nextToken()).intValue()); // здесь расстояние между точками мне не нужно
                     fromPoint.add(from);
                     toPoint.add(to);
-                    System.out.print(from + " " + cost + " ");
+                    this.textToFile_4 = this.textToFile_4 + (from + " " + cost + " ");
                 }
                 line = buff.readLine();
             }
@@ -59,7 +65,8 @@ public class HabrGraph extends JFrame {
         }
 
         try {//парсинг координат в массив индекс в массиве это номер точки
-            FileReader fr = new FileReader(fileTwo);
+            System.out.println("*Парсинг координат в массив, номер точки это индекс в массиве");
+            FileReader fr = new FileReader(parseFromFileSet);
 
             BufferedReader buffTwo = new BufferedReader(fr);
             String lineTwo = buffTwo.readLine();
@@ -87,6 +94,7 @@ public class HabrGraph extends JFrame {
         }
 
         try { //визуализация объектов первой точки, второй точки и отрезка между ними
+            System.out.println("*Визуализация");
             for (int i = 0; i < fromPoint.size(); i++) {
                 // данные первой точки
                 java.lang.Object v = graph.insertVertex(parent, null, fromPoint.get(i), xcoord.get(fromPoint.get(i)), ycoord.get(fromPoint.get(i)), 22, 15);

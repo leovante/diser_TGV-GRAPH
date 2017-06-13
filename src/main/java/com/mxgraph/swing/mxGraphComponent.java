@@ -3,85 +3,32 @@
  */
 package com.mxgraph.swing;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.Stroke;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.image.BufferedImage;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.EventObject;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoundedRangeModel;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.RepaintManager;
-import javax.swing.SwingUtilities;
-import javax.swing.ToolTipManager;
-import javax.swing.TransferHandler;
-
 import com.mxgraph.canvas.mxGraphics2DCanvas;
 import com.mxgraph.canvas.mxICanvas;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.model.mxGraphModel.Filter;
 import com.mxgraph.model.mxIGraphModel;
-import com.mxgraph.swing.handler.mxCellHandler;
-import com.mxgraph.swing.handler.mxConnectionHandler;
-import com.mxgraph.swing.handler.mxEdgeHandler;
-import com.mxgraph.swing.handler.mxElbowEdgeHandler;
-import com.mxgraph.swing.handler.mxGraphHandler;
-import com.mxgraph.swing.handler.mxGraphTransferHandler;
-import com.mxgraph.swing.handler.mxPanningHandler;
-import com.mxgraph.swing.handler.mxSelectionCellsHandler;
-import com.mxgraph.swing.handler.mxVertexHandler;
+import com.mxgraph.swing.handler.*;
 import com.mxgraph.swing.util.mxCellOverlay;
 import com.mxgraph.swing.util.mxICellOverlay;
 import com.mxgraph.swing.view.mxCellEditor;
 import com.mxgraph.swing.view.mxICellEditor;
 import com.mxgraph.swing.view.mxInteractiveCanvas;
-import com.mxgraph.util.mxConstants;
-import com.mxgraph.util.mxEvent;
-import com.mxgraph.util.mxEventObject;
-import com.mxgraph.util.mxEventSource;
+import com.mxgraph.util.*;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
-import com.mxgraph.util.mxPoint;
-import com.mxgraph.util.mxRectangle;
-import com.mxgraph.util.mxResources;
-import com.mxgraph.util.mxUtils;
-import com.mxgraph.view.mxCellState;
-import com.mxgraph.view.mxEdgeStyle;
+import com.mxgraph.view.*;
 import com.mxgraph.view.mxEdgeStyle.mxEdgeStyleFunction;
-import com.mxgraph.view.mxGraph;
-import com.mxgraph.view.mxGraphView;
-import com.mxgraph.view.mxTemporaryCellStates;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.*;
+import java.util.List;
 
 /**
  * For setting the preferred size of the viewport for scrolling, use
@@ -187,13 +134,13 @@ public class mxGraphComponent extends JScrollPane implements Printable
 	{
 		DEFAULT_EXPANDED_ICON = new ImageIcon(
 				mxGraphComponent.class
-						.getResource("/com/com.mxgraph/swing/images/expanded.gif"));
+						.getResource("/images/expanded.gif"));
 		DEFAULT_COLLAPSED_ICON = new ImageIcon(
 				mxGraphComponent.class
-						.getResource("/com/com.mxgraph/swing/images/collapsed.gif"));
+						.getResource("/images/collapsed.gif"));
 		DEFAULT_WARNING_ICON = new ImageIcon(
 				mxGraphComponent.class
-						.getResource("/com/com.mxgraph/swing/images/warning.gif"));
+						.getResource("/images/warning.gif"));
 	}
 
 	/**
